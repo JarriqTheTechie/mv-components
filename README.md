@@ -6,10 +6,6 @@ description: >-
 
 # Installation
 
-## **Install masonite-view-components**
-
-
-
 #### Install masonite-view-components
 
 ```

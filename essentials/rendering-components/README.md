@@ -27,7 +27,7 @@ You can pass data to Masonite View Components using html attributes. All primiti
 **Passing values as strings**
 
 ```
-<x-Button data="{{ value }}"/>.
+<x-Button data="{{ value }}"/>
 ```
 
 ****
@@ -37,3 +37,5 @@ You can pass data to Masonite View Components using html attributes. All primiti
 ```
 <x-Button data={{ value }}/>
 ```
+
+Notice that passing objects we remove the quotes around our variable.&#x20;
