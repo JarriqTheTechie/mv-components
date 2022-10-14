@@ -16,8 +16,6 @@ pip install masonite-view-components
 
 In your `app/providers/__init__.py` file add the following import
 
-
-
 {% code title="app/providers/__init__.py" %}
 ```python
 from masonite_view_components.MasoniteViewComponentProvider import MasoniteViewComponentProvider
