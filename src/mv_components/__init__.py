@@ -13,15 +13,15 @@ except ModuleNotFoundError:
 
 def config_loader() -> str:
     """
-        Gets component directory from masonite_view_components config file. Fallback to "components" directory in
+        Gets component directory from mv_component config file. Fallback to "components" directory in
         templates folder.
     return:
         str
     """
     COMPONENTS_DIR: str
     try:
-        from config.view_component import ViewComponent
-        COMPONENTS_DIR = ViewComponent.get('PATH')
+        from config.view_component import MVComponent
+        COMPONENTS_DIR = MVComponent.get('PATH')
         return COMPONENTS_DIR
     except:
         COMPONENTS_DIR = "components"
@@ -32,13 +32,13 @@ def render_inline(jinja: str, **kwargs: Dict[str, Any]) -> str:
     """
         Renders component without supplying a template file. Usage example.
 
-        return render_inline('<x-ExampleComponent/>')
+        return render_inline('<mv-ExampleComponent/>')
 
     return:
         str
     """
     env = Environment()
-    env.add_extension('masonite_view_components.masonite_view_component_ext.MasoniteViewComponentExt')
+    env.add_extension('mv_components.mv_component_ext.MVComponentExt')
     kwargs = {**kwargs, **_render(), **_render_with_collection()}
     tmpl = env.from_string(f'{jinja}')
     output = Markup(tmpl.render(**kwargs))
@@ -59,13 +59,13 @@ def annotate_checker() -> bool:
     return:
         bool
     """
-    MASONITE_VIEW_COMPONENT_ANNOTATE: bool
+    MV_COMPONENT_ANNOTATE: bool
     try:
-        from config.catapult import view_components
-        MASONITE_VIEW_COMPONENT_ANNOTATE = view_components.get('ANNOTATE')
+        from config.view_component import MVComponent
+        MV_COMPONENT_ANNOTATE = MVComponent.get('ANNOTATE')
     except:
-        MASONITE_VIEW_COMPONENT_ANNOTATE = False
-    return MASONITE_VIEW_COMPONENT_ANNOTATE
+        MV_COMPONENT_ANNOTATE = False
+    return MV_COMPONENT_ANNOTATE
 
 
 def to_class(path: str) -> Any:
@@ -137,7 +137,7 @@ def _render() -> Dict[str, Any]:
         return:
             str
         """
-        component = component.replace("x-", "")
+        component = component.replace("mv-", "")
         if "caller" in kwargs:
             kwargs.pop('caller')
         component_class = to_class(component_class_path(component))(**kwargs)
@@ -185,12 +185,12 @@ def _render_with_collection() -> Dict[str, Any]:
 
             In the view/template you can use it as follows.
 
-            <x-ExampleComponent collection="example" example={{ examples }} />
+            <mv-ExampleComponent collection="example" example={{ examples }} />
 
         return:
             str
         """
-        component = component.replace("x-", "")
+        component = component.replace("mv-", "")
         if "caller" in kwargs:
             kwargs.pop('caller')
         component_class = to_class(component_class_path(component))(**kwargs)
@@ -227,9 +227,9 @@ def _render_with_collection() -> Dict[str, Any]:
 
 try:
     import Flask
-    def MasoniteViewComponent(app: Flask) -> Any:
+    def MVComponent(app: Flask) -> Any:
         try:
-            app.jinja_env.add_extension('masonite_view_components.masonite_view_component_ext.MasoniteViewComponentExt')
+            app.jinja_env.add_extension('mv_components.mv_component_ext.MVComponentExt')
             app.context_processor(_render)
             app.context_processor(_render_with_collection)
         except:

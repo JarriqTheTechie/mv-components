@@ -1,0 +1,5 @@
+""" __CLASS__ Component """
+
+class __CLASS__:
+    def __init__(self):
+        pass

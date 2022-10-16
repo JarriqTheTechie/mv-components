@@ -4,20 +4,20 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="masonite-view-components",
+    name="mv-components",
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version="0.0.2",
+    version="0.2",
     packages=[
-        "masonite_view_components",
+        "mv_components",
     ],
     package_dir={"": "src"},
     description="A framework to create reusable server rendered components with low coupling and easy testability.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     # The project's main homepage.
-    url="https://github.com/JarriqTheTechie/masonite-view-component",
+    url="https://github.com/JarriqTheTechie/mv-component",
     # Author details
     author="Jarriq Rolle",
     author_email="jrolle@bnbbahamas.com",
