@@ -76,11 +76,11 @@ class CardListComponent:
     
     def __init__(self, cars=cars, cars_counter:int):
         self.cars = cars
-        self.counter = cars_counter
+        self.cars_counter = cars_counter
 ```
 
 In our component's html file we can now do this. &#x20;
 
 ```django
-<p>{{ car.model }} / {{ car.make }} - Index #{{ counter }}</>
+<p>{{ car.model }} / {{ car.make }} - Index #{{ cars_counter }}</>
 ```
