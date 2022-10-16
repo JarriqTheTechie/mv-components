@@ -8,7 +8,7 @@ description: >-
 
 #### Install mv-components
 
-```
+```bash
 pip install mv-components
 ```
 
