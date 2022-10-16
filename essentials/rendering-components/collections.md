@@ -31,8 +31,36 @@ class CarsController(Controller):
 
 #### Masonite View Component Pattern
 
+To use this pattern, a class-based component must be created. e.g. lets make a <mark style="color:red;">`CarListComponent`</mark>&#x20;
+
+```
+python craft view-component:make CarListComponent
+```
+
+This will create two files in your components directory. In our example we will get the following files  <mark style="color:red;">`templates/components/CardListComponent.py`</mark> & <mark style="color:red;">`templates/components/CardListComponent.html`</mark>
+
+To enable our collections feature we add a `with_collection_parameter` to our CardListComponent. This allows us to avoid writing a for-loop as seen above.&#x20;
+
+#### Component
+
+{% code title="CardListComponent.py" %}
+```python
+class CardListComponent:
+    with_collection_parameter = "cars"
+    
+    def __init__(self, cars=cars):
+        self.cars = cars
+```
+{% endcode %}
+
+{% code title="CardListComponent.html" %}
+```django
+<p>{{ car.model }} / {{ car.make }}</>
+```
+{% endcode %}
+
 {% code title="templates/cars/index.html" %}
 ```html
-<x-CarComponent collection="cars" cars={{ cars }}/>
+<x-CarListComponent collection="cars" cars={{ cars }}/>
 ```
 {% endcode %}
