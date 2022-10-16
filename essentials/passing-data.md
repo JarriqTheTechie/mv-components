@@ -2,7 +2,7 @@
 
 **Passing data to components**
 
-You can pass data to Masonite View Components using html attributes. All primitive datatypes are supported as well as custom objects.
+You can pass data to MV-Components using html attributes. All primitive datatypes are supported as well as custom objects.
 
 ****
 

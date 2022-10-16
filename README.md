@@ -1,32 +1,31 @@
 ---
-description: >-
-  A framework to create reusable server rendered view components with low
-  coupling and easy testability.
+description: Create reusable view components for the Masonite Framework
 ---
 
-# Installation
+# MV-Components
 
-#### Install masonite-view-components
+A MV-Component is a powerful way to write reusable components for your Masonite applications. It provides code reusability and also testability in ways native views just does not allow. A MV-Component is typically comprised of a view file and a python class file.&#x20;
 
-```
-pip install masonite-view-components
-```
+### Why use MV-Components
 
-#### **Add to Masonite application**
+#### Reusability
 
-In your `app/providers/__init__.py` file add the following import
+The same MV-Component can be used in various parts of an application without needing to rewrite the same code.&#x20;
 
-{% code title="app/providers/__init__.py" %}
-```python
-from masonite_view_components.MasoniteViewComponentProvider import MasoniteViewComponentProvider
-```
-{% endcode %}
+#### Single Responsibility
+
+Allows complex logic to be stored along with the component that it belongs to instead of scattered across your codebase.
+
+#### Readability
+
+Makes it easier to reason about the behavior in your templates.&#x20;
 
 
 
-In your `config/providers.py` file add the following import and add `MasoniteViewComponentProvider` to your list of **PROVIDERS**
+### Inspirations
 
-```python
-from app.providers import MasoniteViewComponentProvider
-```
+This project is inspired by several projects&#x20;
+
+* ViewComponent (Ruby on Rails)
+* Blade Components (Laravel)
 

@@ -15,7 +15,7 @@ class CarsController(Controller):
     })
 ```
 
-. We will render first using they typical jinja pattern then using the Masonite View Component way.&#x20;
+We will render first using they typical jinja pattern then using the MV-Component way.&#x20;
 
 #### Typical Jinja Pattern
 
@@ -29,7 +29,7 @@ class CarsController(Controller):
 ```
 {% endcode %}
 
-#### Masonite View Component Pattern
+#### MV-Component Pattern
 
 To use this pattern, a class-based component must be created. e.g. lets make a <mark style="color:red;">`CarListComponent`</mark>&#x20;
 
