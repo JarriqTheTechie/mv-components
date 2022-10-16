@@ -26,7 +26,7 @@ setup(
     # If your package should include things you specify in your MANIFEST.in file
     # Use this option if your package needs to include files that are not python files
     # like html templates or css files
-    include_package_data=False,
+    include_package_data=True,
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         # How mature is this project? Common values are
