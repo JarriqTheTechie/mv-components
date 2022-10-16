@@ -64,3 +64,18 @@ class CardListComponent:
 <x-CarListComponent collection="cars" cars={{ cars }}/>
 ```
 {% endcode %}
+
+#### Collection Counter
+
+Masonite View Components additionally allows you to define a collection indexer/counter. This is helpful in many instances.&#x20;
+
+```python
+Component
+class CardListComponent:
+    with_collection_parameter = "cars"
+    
+    def __init__(self, cars=cars, cars_counter:int):
+        self.cars = cars
+        self.counter = cars_counter
+```
+
