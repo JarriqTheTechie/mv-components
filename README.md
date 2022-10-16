@@ -1,8 +1,6 @@
----
-description: Create reusable view components for the Masonite Framework
----
+# Overview
 
-# MV-Components
+## MV-Components <a href="#description" id="description"></a>
 
 A MV-Component is a powerful way to write reusable components for your Masonite applications. It provides code reusability and also testability in ways native views just does not allow. A MV-Component is typically comprised of a view file and a python class file.&#x20;
 

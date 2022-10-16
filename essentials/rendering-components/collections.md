@@ -61,7 +61,7 @@ class CardListComponent:
 
 {% code title="templates/cars/index.html" %}
 ```html
-<x-CarListComponent collection="cars" cars={{ cars }}/>
+<mv-CarListComponent collection="cars" cars={{ cars }}/>
 ```
 {% endcode %}
 

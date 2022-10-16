@@ -1,7 +1,7 @@
 # Table of contents
 
-* [MV-Components](README.md)
-* [Installation](<README (1).md>)
+* [Overview](README.md)
+* [Installation](README.md)
 
 ## Essentials
 

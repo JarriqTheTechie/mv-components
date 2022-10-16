@@ -9,7 +9,7 @@ You can pass data to MV-Components using html attributes. All primitive datatype
 **Passing values as strings**
 
 ```
-<x-Button data="{{ value }}"/>
+<mv-Button data="{{ value }}"/>
 ```
 
 ****
@@ -17,7 +17,7 @@ You can pass data to MV-Components using html attributes. All primitive datatype
 **Passing objects**
 
 ```
-<x-Button data={{ value }}/>
+<mv-Button data={{ value }}/>
 ```
 
 Notice that passing objects we remove the quotes around our variable.&#x20;
