@@ -39,7 +39,7 @@ python craft view-component:make CarListComponent
 
 This will create two files in your components directory. In our example we will get the following files  <mark style="color:red;">`templates/components/CardListComponent.py`</mark> & <mark style="color:red;">`templates/components/CardListComponent.html`</mark>
 
-To enable our collections feature we add a `with_collection_parameter` to our CardListComponent. This allows us to avoid writing a for-loop as seen above.&#x20;
+To enable our collections feature we add a <mark style="color:red;">`with_collection_parameter`</mark> to our CardListComponent. This allows us to avoid writing a for-loop as seen above.&#x20;
 
 #### Component
 
@@ -67,10 +67,10 @@ class CardListComponent:
 
 #### Collection Counter
 
-Masonite View Components additionally allows you to define a collection indexer/counter. This is helpful in many instances.&#x20;
+Additionally, Masonite View Components allows you to define a collection indexer/counter. This is helpful in many instances.&#x20;
 
 ```python
-Component
+CardListComponent.py
 class CardListComponent:
     with_collection_parameter = "cars"
     
@@ -79,3 +79,8 @@ class CardListComponent:
         self.counter = cars_counter
 ```
 
+In our component's html file we can now do this. &#x20;
+
+```django
+<p>{{ car.model }} / {{ car.make }} - Index #{{ counter }}</>
+```
