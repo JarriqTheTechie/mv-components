@@ -1,6 +1,6 @@
-# Properties
+# Passing Data
 
-**Passing Properties to components**
+**Passing data to components**
 
 You can pass data to Masonite View Components using html attributes. All primitive datatypes are supported as well as custom objects.
 
