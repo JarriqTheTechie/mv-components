@@ -131,6 +131,7 @@ def render_if(component_class: Any) -> Any:
 
 def _render() -> Dict[str, Any]:
     def render(component: str, **kwargs: Dict[str, Any]) -> str:
+
         """
             Render a component.
 
@@ -138,7 +139,9 @@ def _render() -> Dict[str, Any]:
             str
         """
         component = component.replace("mv-", "")
+        content = ""
         if "caller" in kwargs:
+            content = {"content": kwargs.get('caller')()}
             kwargs.pop('caller')
         component_class = to_class(component_class_path(component))(**kwargs)
 
@@ -147,7 +150,7 @@ def _render() -> Dict[str, Any]:
             try:
                 arguments_from_component = kwargs
                 if arguments_from_component:
-                    payload = {**arguments_from_component, **component_class.__dict__}
+                    payload = {**arguments_from_component, **component_class.__dict__, **content}
                 else:
                     payload = component_class.__dict__
                 template = render_template(component_html_path(component), **payload)
@@ -191,7 +194,9 @@ def _render_with_collection() -> Dict[str, Any]:
             str
         """
         component = component.replace("mv-", "")
+        content = ""
         if "caller" in kwargs:
+            content = {"content": kwargs.get('caller')()}
             kwargs.pop('caller')
         component_class = to_class(component_class_path(component))(**kwargs)
         arguments_from_component = component_class.__dict__
@@ -201,7 +206,7 @@ def _render_with_collection() -> Dict[str, Any]:
             for n in range(len(component_class.__dict__[f"{collection}"])):
                 if f"{collection}_counter" in component_class.__dict__:
                     component_class.__dict__[f"{collection}_counter"] = n + 1
-                arguments = {**component_class.__dict__, **{f"{collection}": arguments_from_component[collection][n]}}
+                arguments = {**component_class.__dict__, **{f"{collection}": arguments_from_component[collection][n]}, **content}
                 scoped_class = component_class
                 scoped_class.__dict__ = arguments
                 if render_if(component_class)() is True or render_if(component_class)() is None:
@@ -225,14 +230,12 @@ def _render_with_collection() -> Dict[str, Any]:
             return render_inline(results)
     return dict(render_with_collection=render_with_collection)
 
-try:
-    import Flask
-    def MVComponent(app: Flask) -> Any:
-        try:
-            app.jinja_env.add_extension('mv_components.mv_component_ext.MVComponentExt')
-            app.context_processor(_render)
-            app.context_processor(_render_with_collection)
-        except:
-            pass
-except:
-    pass
+
+def MVComponent(app: Flask) -> Any:
+    try:
+        app.jinja_env.add_extension('mv_components.mv_component_ext.MVComponentExt')
+        app.context_processor(_render)
+        app.context_processor(_render_with_collection)
+    except:
+        pass
+
