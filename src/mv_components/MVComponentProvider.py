@@ -1,3 +1,5 @@
+import shutil
+
 from masonite.facades import View
 from masonite.providers import Provider
 from . import _render, _render_with_collection, config_loader
@@ -6,11 +8,23 @@ from inflection import camelize, underscore
 import os, pathlib
 
 
+class CreateConfigCommand(Command):
+    """
+    Creates a mv-component config file
+
+    mv-component:config
+    """
+    def handle(self):
+        stub = str(pathlib.Path(__file__).parent.absolute()) + r"\stubs\mv_component.stub"
+        shutil.copyfile(stub, os.getcwd()+"\\config\\mv_component.py")
+        self.info(f"Configuration file created - config\mv_component.py")
+
+
 class CreateComponentCommand(Command):
     """
     Creates a new mv-component
 
-    view-component:make
+    mv-component:make
         {name : Name of component}
         {--f|flag : An optional argument for the command}
         {--o|option=default: An optional argument for the command with default value}
@@ -47,6 +61,7 @@ class MVComponentProvider(Provider):
         View.share(_render())
         View.share(_render_with_collection())
         self.application.make("commands").add(CreateComponentCommand())
+        self.application.make("commands").add(CreateConfigCommand())
 
     def boot(self):
         pass

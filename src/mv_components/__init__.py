@@ -20,7 +20,7 @@ def config_loader() -> str:
     """
     COMPONENTS_DIR: str
     try:
-        from config.view_component import MVComponent
+        from config.mv_component import MVComponent
         COMPONENTS_DIR = MVComponent.get('PATH')
         return COMPONENTS_DIR
     except:
@@ -61,7 +61,7 @@ def annotate_checker() -> bool:
     """
     MV_COMPONENT_ANNOTATE: bool
     try:
-        from config.view_component import MVComponent
+        from config.mv_component import MVComponent
         MV_COMPONENT_ANNOTATE = MVComponent.get('ANNOTATE')
     except:
         MV_COMPONENT_ANNOTATE = False
@@ -231,7 +231,7 @@ def _render_with_collection() -> Dict[str, Any]:
     return dict(render_with_collection=render_with_collection)
 
 
-def MVComponent(app: Flask) -> Any:
+def MVComponent(app) -> Any:
     try:
         app.jinja_env.add_extension('mv_components.mv_component_ext.MVComponentExt')
         app.context_processor(_render)

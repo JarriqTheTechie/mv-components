@@ -9,5 +9,5 @@ We love the idea of a community. We'll be putting together a contribution guide 
 
 # License
 
-ViewComponent is available as open source under the terms of the MIT License http://opensource.org/licenses/MIT
+MV-Component is available as open source under the terms of the MIT License http://opensource.org/licenses/MIT
 
