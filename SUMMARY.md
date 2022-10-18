@@ -1,8 +1,8 @@
 # Table of contents
 
 * [Overview](README.md)
-* [Installation](installation/README.md)
-  * [Configuration (optional)](installation/configuration-optional.md)
+* [Installation](installation.md)
+* [Configuration (optional)](configuration-optional.md)
 
 ## Essentials
 

@@ -23,3 +23,16 @@ Anonymous components are simple html files within the component's directory. Ano
 
 
 
+### Subdirectory
+
+Components can also be created within subdirectories. Here you can keep all component logic tied together. To create our Button component in its own folder structure, run the following command.&#x20;
+
+```
+python craft mv-component:make Button -s
+```
+
+or
+
+```
+python craft mv-component:make Button -sidecar
+```
