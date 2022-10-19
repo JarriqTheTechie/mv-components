@@ -18,7 +18,7 @@ In your `app/providers/__init__.py` file add the following import
 
 {% code title="app/providers/__init__.py" %}
 ```python
-from mview_components.MVComponentProvider import MVComponentProvider
+from mv_components.MVComponentProvider import MVComponentProvider
 ```
 {% endcode %}
 
