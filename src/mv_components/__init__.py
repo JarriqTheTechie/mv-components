@@ -144,24 +144,22 @@ def _render() -> Dict[str, Any]:
             content = {"content": kwargs.get('caller')()}
             kwargs.pop('caller')
         component_class = to_class(component_class_path(component))(**kwargs)
-
         if render_if(component_class)() is True or render_if(component_class)() is None:
             arguments_from_component = component_class.__dict__
-            try:
-                arguments_from_component = kwargs
-                if arguments_from_component:
-                    if content.get("content"):
-                        payload = {**arguments_from_component, **component_class.__dict__, **content}
-                    else:
-                        payload = {**arguments_from_component, **component_class.__dict__}
+            arguments_from_component = kwargs
+            if arguments_from_component:
+                if content.get("content"):
+                    payload = {**arguments_from_component, **component_class.__dict__, **content}
                 else:
-                    payload = component_class.__dict__
+                    payload = {**arguments_from_component, **component_class.__dict__}
+            else:
+                payload = component_class.__dict__
+            try:
                 template = render_template(component_html_path(component), **payload)
             except NameError:
                 from masonite.facades import View
                 from masonite.helpers import compact
-                template = View.render(component_html_path(component), arguments_from_component).get_content()
-
+                template = View.render(component_html_path(component), payload).get_content()
             if annotate_checker() is True:
                 comment_start = f"<!-- BEGIN {component_html_path(component)} --> \n"
                 comment_end = f"\n <!-- END {component_html_path(component)} --> "
