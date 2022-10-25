@@ -1,4 +1,5 @@
 from .Exceptions import *
+from .ActiveComponent import *
 from typing import Any, Dict
 from markupsafe import Markup
 from jinja2 import Environment
@@ -129,6 +130,9 @@ def render_if(component_class: Any) -> Any:
     return render_if
 
 
+
+
+
 def _render() -> Dict[str, Any]:
     def render(component: str, **kwargs: Dict[str, Any]) -> str:
 
@@ -140,20 +144,27 @@ def _render() -> Dict[str, Any]:
         """
         component = component.replace("mv-", "")
         content = {"content": ""}
+        active = {"__active__": ""}
         if "caller" in kwargs:
-            content = {"content": kwargs.get('caller')()}
+            try:
+                content = {"content": kwargs.get('caller')()}
+            except TypeError:
+                content = {"content": ""}
             kwargs.pop('caller')
+        if "__active__" in kwargs:
+            active = {"__active__": ActiveComponent().build(kwargs['__active__'])}
+            kwargs.pop('__active__')
         component_class = to_class(component_class_path(component))(**kwargs)
         if render_if(component_class)() is True or render_if(component_class)() is None:
             arguments_from_component = component_class.__dict__
             arguments_from_component = kwargs
-            if arguments_from_component:
-                if content.get("content"):
-                    payload = {**arguments_from_component, **component_class.__dict__, **content}
-                else:
-                    payload = {**arguments_from_component, **component_class.__dict__}
+            if content.get("content"):
+                payload = {**arguments_from_component, **component_class.__dict__, **content}
             else:
-                payload = component_class.__dict__
+                payload = {**arguments_from_component, **component_class.__dict__}
+            if active.get("__active__"):
+                payload = {**payload, **active}
+
             try:
                 template = render_template(component_html_path(component), **payload)
             except NameError:

@@ -31,7 +31,7 @@ re_attr_name = r"(?P<name>[a-zA-Z_][0-9a-zA-Z_]*)"
 re_equal = r"\s*=\s*"
 
 re_attr = rf"""
-{re_attr_name}
+(?:|@){re_attr_name}
 (?:
     {re_equal}
     (?P<value>".*?"|'.*?'|{VAR_START}.*?{VAR_END})
